@@ -5,13 +5,13 @@ Do you also have a group in Telegram where you and your fellow students decide i
 next movie shown in TU Film? We are in such a group and you often face the same dialogues in there. Here are just a
 few examples:
 
-A: *Hey, who's going tonight?*
+A: *Hey, who's going tonight?* <br />
 B: *What movie?*
 
-A: *Who's going to watch movie X tonight?*
+A: *Who's going to watch movie X tonight?* <br />
 B: *What's movie X about? Is it good*
 
-A: *Should we meet before?*
+A: *Should we meet before?* <br />
 B: *When does the movie start?*
 
 This leads to looking up these thing on the TU Film page, Google, or IMDb. THis this bot you can get all this

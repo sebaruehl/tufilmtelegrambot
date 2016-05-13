@@ -1,0 +1,5 @@
+cron:
+- description: weekly reminder
+  url: /reminder
+  schedule: every day 11:00 
+  timezone: Europe/Berlin

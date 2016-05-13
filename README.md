@@ -1,7 +1,21 @@
 # TU Film Telegram Bot
 > Useful Telegram Bot to stay updated about the upcoming schedule for TU Film
 
-This README is currently constructed.
+Do you also have a group in Telegram where you and your fellow students decide if you are going to the
+next movie shown in TU Film? We are in such a group and you often face the same dialogues in there. Here are just a
+few examples:
+
+A: *Hey, who's going tonight?*
+B: *What movie?*
+
+A: *Who's going to watch movie X tonight?*
+B: *What's movie X about? Is it good*
+
+A: *Should we meet before?*
+B: *When does the movie start?*
+
+This leads to looking up these thing on the TU Film page, Google, or IMDb. THis this bot you can get all this
+ information directly into Telegram. See below for all possible features.
 
 ## How to Use
 

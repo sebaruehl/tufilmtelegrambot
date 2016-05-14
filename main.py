@@ -205,10 +205,8 @@ class WebHookHandler(webapp2.RequestHandler):
                                                    next_movie.url,
                                                    next_movie.imdbLink,
                                                    next_movie.imdbRating))
-            elif (text == '/commands') or (text == '/?'):
-                reply(chat_id, "/listall\n/next\n/subscribe\n/unsubscribe")
             else:
-                reply(chat_id, "Command not known, use /? or /commands to get an overview over possible commands.")
+                reply(chat_id, "Command not known, use / to get an overview over possible commands.")
 
         else:
             # reply(chat_id, "Use /<command>. See possible commands with /? or /commands.")

@@ -33,7 +33,7 @@ around 11 a.m. on the day of the movie.
 ## Developing
 
 The bot is written in Python 2.7 and hosted on the Google Cloud Platform. More information
-about developing on the Google Cloud Platform with Python can be found [here](https://cloud.google.com/appengine/docs/python/)
+about developing on the Google Cloud Platform with Python can be found [here](https://cloud.google.com/appengine/docs/python/).
 To start developing clone this repository to your local workspace.
 
 ```shell
@@ -61,6 +61,11 @@ main directory.
 cd tufilmbot/
 echo API-Token > bot.token
 ```
+
+Finally you have to set web hook for the bot to the application on Google, call (replace **projectId**
+with the one set in your app.yaml file):
+
+https://**projectId**.appspot.com/set_webhook?url=https://**projectId**.appspot.com/webhook
 
 ### Deploying / Publishing
 

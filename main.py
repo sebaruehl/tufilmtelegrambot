@@ -33,8 +33,21 @@ class Movie(ndb.Model):
 # Helper functions
 
 def add_subscriber(c_id):
-    subscriber = Subscriber(chat_id=c_id)
-    subscriber.put()
+    check = Subscriber.query(Subscriber.chat_id == c_id).fetch()
+    if check:
+        return 0
+    else:
+        subscriber = Subscriber(chat_id=c_id)
+        subscriber.put()
+        return 1
+
+
+def remove_subscriber(c_id):
+    check = Subscriber.query(Subscriber.chat_id == c_id).fetch()
+    if check:
+        check[0].key.delete()
+        return 1
+    return 0
 
 
 def add_movie(title, date, url, imdblink, imdbrating):
@@ -46,11 +59,12 @@ def add_movie(title, date, url, imdblink, imdbrating):
 
 
 def get_formatted_movie_list():
-    all_movies = Movie.query().fetch()
+    today = datetime.now()
+    all_movies = Movie.query(Movie.date >= today).fetch()
     all_movies.sort(key=lambda movie_element: movie_element.date)
     movie_list = ''
     for movie in all_movies:
-        movie_list += (movie.title + ', ' + str(movie.date) + '\n')
+        movie_list += (movie.date.strftime('%d.%m.%Y') + ': ' + movie.title + '\n')
     return movie_list
 
 
@@ -172,8 +186,15 @@ class WebHookHandler(webapp2.RequestHandler):
 
         if text.startswith('/'):
             if text == '/subscribe':
-                reply(chat_id, 'Subscribed to weekly reminder')
-                add_subscriber(chat_id)
+                if add_subscriber(chat_id) == 1:
+                    reply(chat_id, 'Subscribed to movie reminder!')
+                else:
+                    reply(chat_id, 'Already subscribed!')
+            elif text == '/unsubscribe':
+                if remove_subscriber(chat_id) == 1:
+                    reply(chat_id, 'Unsubscribed from movie reminder!')
+                else:
+                    reply(chat_id, 'Not subscribed!')
             elif text == '/listall':
                 reply(chat_id, get_formatted_movie_list())
             elif text == '/next':
@@ -185,7 +206,7 @@ class WebHookHandler(webapp2.RequestHandler):
                                                    next_movie.imdbLink,
                                                    next_movie.imdbRating))
             elif (text == '/commands') or (text == '/?'):
-                reply(chat_id, "/listall\n/next\n/subscribe")
+                reply(chat_id, "/listall\n/next\n/subscribe\n/unsubscribe")
             else:
                 reply(chat_id, "Command not known, use /? or /commands to get an overview over possible commands.")
 

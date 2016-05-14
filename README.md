@@ -1,12 +1,12 @@
 # TU Film Telegram Bot
-> Useful Telegram Bot to stay updated about the upcoming schedule for TU Film
+> Useful Telegram bot to stay updated about the upcoming schedule for TU Film
 
 Do you also have a group in Telegram where you and your fellow students decide if you are going to the
-next movie shown in TU Film? We are in such a group and you often face the same dialogues in there. Here are just a
-few examples:
+next movie shown in TU Film? We are in such a group and you often face the same dialogues. Here are a
+few examples of such dialogues:
 
 A: *Hey, who's going tonight?* <br />
-B: *What movie?*
+B: *To what movie?*
 
 A: *Who's going to watch movie X tonight?* <br />
 B: *What's movie X about? Is it good?*
@@ -14,12 +14,12 @@ B: *What's movie X about? Is it good?*
 A: *Should we meet before?* <br />
 B: *When does the movie start?*
 
-This leads to looking up these thing on the TU Film page, Google, or IMDb. THis this bot you can get all this
- information directly into Telegram. See below for all possible features.
+This leads to looking up all these things on the TU Film page, Google, or IMDb. With the TU Film bot you can get all this
+ information directly into Telegram. See below for a list of all features.
 
 ## How to Use
 
-Just add the bot in Telegram. Serach for **tufilmbot**. Type '/' to see an overview over
+Just add the bot in Telegram. Search for **tufilmbot**. Type '/' to see an overview over
  possible commands.
 
 ## Features
@@ -52,20 +52,20 @@ cd tufilmbot/
 cp app.yaml.sample app.yaml
 ```
 
-Furthermore, you need a bot for testing the application. Information about how to create
-a new Telegram bot can be found [here](https://core.telegram.org/bots). In the process of creating
+Furthermore, a own Telegram bot is need for testing the application. Information about how to create
+a new one can be found [here](https://core.telegram.org/bots). In the process of creating
 the bot you will receive an API-Token. Save this token in a file called **bot.token** in the projects'
 main directory.
 
 ```shell
 cd tufilmbot/
-echo <API-Token> > bot.token
+echo API-Token > bot.token
 ```
 
 ### Deploying / Publishing
 
 For easy deploying use the Google App Engine SDK.
-It can be downloaded [here](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python)
+It can be downloaded [here](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python).
 
 
 ## Contributing
@@ -79,4 +79,4 @@ branch. Pull requests are warmly welcome.
 
 ## Licensing
 
-The code in this project is licensed under MIT license ([more information](https://opensource.org/licenses/MIT))
+The code in this project is licensed under MIT license ([more information](https://opensource.org/licenses/MIT)).

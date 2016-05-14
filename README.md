@@ -70,7 +70,7 @@ It can be downloaded [here](https://cloud.google.com/appengine/downloads#Google_
 
 ## Contributing
 
-If you find any bugs or want additional features feel free to create a new issues. If you any questions or other concerns
+If you find any bugs or want additional features feel free to create a new issues. If you have any other questions or concerns
 you can also send an email.
 
 If you'd like to contribute, please fork the repository and use a feature

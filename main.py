@@ -185,6 +185,8 @@ class WebHookHandler(webapp2.RequestHandler):
             return
 
         if text.startswith('/'):
+            if text.find('@') > 0:
+                text = text[0:text.find('@')]
             if text == '/subscribe':
                 if add_subscriber(chat_id) == 1:
                     reply(chat_id, 'Subscribed to movie reminder!')

@@ -12,6 +12,7 @@ import webapp2
 
 TOKEN = open('bot.token').read()
 BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
+BOT_NAME = 'tufilmbot'
 
 
 # ================================
@@ -186,7 +187,10 @@ class WebHookHandler(webapp2.RequestHandler):
 
         if text.startswith('/'):
             if text.find('@') > 0:
-                text = text[0:text.find('@')]
+                if text.find(BOT_NAME) > 0:
+                    text = text[0:text.find('@')]
+                else:
+                    return
             if text == '/subscribe':
                 if add_subscriber(chat_id) == 1:
                     reply(chat_id, 'Subscribed to movie reminder!')

@@ -135,11 +135,7 @@ class ReminderHandler(webapp2.RequestHandler):
             # care if to many subscribers -> limitations from telegram api
             msg = get_formatted_short_reminder(next_movie)
             for sub in all_subscriber:
-                urlopen(BASE_URL + 'sendMessage', urlencode({
-                    'chat_id': str(sub.chat_id),
-                    'text': msg.encode('utf-8'),
-                    'disable_web_page_preview': 'true',
-                })).read()
+                reply(sub.chat_id, msg)
 
 
 # Handler for adding a new Movie over a URL

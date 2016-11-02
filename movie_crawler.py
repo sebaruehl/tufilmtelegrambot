@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import urllib
 import re
 
-BASIS_URL = "http://www.tu-film.de"
+BASIS_URL = "https://www.tu-film.de"
 
 
 def get_all_title_links():
@@ -36,11 +36,16 @@ def get_movie_details(url_list):
         index_vorstellung = datum.find('Vorstellung')
         index_um = datum.find('um')
         datum = get_formatted_date(datum[index_vorstellung + 12:index_um - 2] + datum[index_um + 2:index_um + 8])
-        imdblink = scraping.find_all(attrs={"class": "title"})[0].find('a')['href']
-        req = urllib.urlopen(imdblink)
-        page = req.read()
-        scraping = BeautifulSoup(page, "lxml")
-        imdbrating = scraping.find_all(attrs={"itemprop": "ratingValue"})[0].text
+        # check if imdb link is given on page, else no imdb lookup
+        if scraping.find_all(attrs={"class": "title"})[0].find('a') is not None:
+            imdblink = scraping.find_all(attrs={"class": "title"})[0].find('a')['href']
+            req = urllib.urlopen(imdblink)
+            page = req.read()
+            scraping = BeautifulSoup(page, "lxml")
+            imdbrating = scraping.find_all(attrs={"itemprop": "ratingValue"})[0].text
+        else:
+            imdblink = ""
+            imdbrating = ""
         ret_list.append([title, datum, url, imdblink, imdbrating])
     return ret_list
 
@@ -79,4 +84,3 @@ def get_month_as_numberstring(month_string):
         'November': '11',
         'Dezember': '12',
     }[month_string]
-

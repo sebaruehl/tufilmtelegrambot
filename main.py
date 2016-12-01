@@ -189,14 +189,14 @@ class WebHookHandler(webapp2.RequestHandler):
                     return
             if text == '/subscribe':
                 if add_subscriber(chat_id) == 1:
-                    reply(chat_id, 'Subscribed to movie reminder!')
+                    reply(chat_id, 'Für den Alarm angemeldet!')
                 else:
-                    reply(chat_id, 'Already subscribed!')
+                    reply(chat_id, 'Bereits angemeldet!')
             elif text == '/unsubscribe':
                 if remove_subscriber(chat_id) == 1:
-                    reply(chat_id, 'Unsubscribed from movie reminder!')
+                    reply(chat_id, 'Abgemeldet vom Alarm!')
                 else:
-                    reply(chat_id, 'Not subscribed!')
+                    reply(chat_id, 'Nicht angemeldet!')
             elif text == '/listall':
                 reply(chat_id, get_formatted_movie_list())
             elif text == '/next':
@@ -208,7 +208,7 @@ class WebHookHandler(webapp2.RequestHandler):
                                                    next_movie.imdbLink,
                                                    next_movie.imdbRating))
             else:
-                reply(chat_id, "Command not known, use / to get an overview over possible commands.")
+                reply(chat_id, "Befehl ungebekannt. Benutze / für eine Überischt möglicher Befehle.")
 
         else:
             # reply(chat_id, "Use /<command>. See possible commands with /? or /commands.")

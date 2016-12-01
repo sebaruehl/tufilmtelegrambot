@@ -29,9 +29,36 @@ class Movie(ndb.Model):
     imdbLink = ndb.StringProperty()
     imdbRating = ndb.StringProperty()
 
+class Going(ndb.Model):
+    chat_id = ndb.IntegerProperty()
+    date_created = ndb.DateTimeProperty()
+
+class GoingAnswers(ndb.Model):
+    user_id = ndb.IntegerProperty()
+    answer = ndb.StringProperty()
+
 
 # ================================
 # Helper functions
+
+def get_going_answers(c_id):
+    today = datetime.now()
+    check = Going.query(ndb.AND(Going.date_created >= today, Going.chat_id == c_id)).fetch()
+
+    if check:
+        return GoingAnswers.query(ancestor=check.key).fetch()
+    else:
+        return 0
+
+def add_going_answer(c_id, user_id, answer):
+    today = datetime.now()
+    check = Going.query(ndb.AND(Going.date_created >= today, Going.chat_id == c_id)).fetch()
+
+    if check:
+        GoingAnswers(parent=check.key, user_id=user_id, answer=answer)
+    else:
+        going = Going(chat_id = c_id, date_created = today)
+        GoingAnswers(parent=going.key, user_id=user_id, answer=answer)
 
 def add_subscriber(c_id):
     check = Subscriber.query(Subscriber.chat_id == c_id).fetch()
@@ -207,6 +234,18 @@ class WebHookHandler(webapp2.RequestHandler):
                                                    next_movie.url,
                                                    next_movie.imdbLink,
                                                    next_movie.imdbRating))
+            elif text == '/whoisgoing':
+                answers = get_going_answers(chat_id)
+                if answers:
+                    # display answers
+                else:
+                    # ask user to create new poll
+            elif text == '/updategoingstatus':
+                answers = get_going_answers(chat_id)
+                if answers:
+                    # display user going options
+                else:
+                    # ask user to create new poll
             else:
                 reply(chat_id, "Command not known, use / to get an overview over possible commands.")
 

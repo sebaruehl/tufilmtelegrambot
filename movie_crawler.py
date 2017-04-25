@@ -5,7 +5,7 @@
 # More information: https://cloud.google.com/appengine/docs/python/tools/using-libraries-python-27
 
 from bs4 import BeautifulSoup
-import urllib
+import urllib.request
 import re
 
 BASIS_URL = "https://www.tu-film.de"
@@ -13,7 +13,7 @@ BASIS_URL = "https://www.tu-film.de"
 
 def get_all_title_links():
     url = BASIS_URL + "/programm"
-    req = urllib.urlopen(url)
+    req = urllib.request.urlopen(url)
     page = req.read()
     scraping = BeautifulSoup(page, "lxml")
     ret_list = []
@@ -26,7 +26,7 @@ def get_movie_details(url_list):
     ret_list = []
     for url_fragment in url_list:
         url = BASIS_URL + url_fragment
-        req = urllib.urlopen(url)
+        req = urllib.request.urlopen(url)
         page = req.read()
         scraping = BeautifulSoup(page, "lxml")
         title = scraping.find_all('h1')[0].text
@@ -39,7 +39,7 @@ def get_movie_details(url_list):
         # check if imdb link is given on page, else no imdb lookup
         if scraping.find_all(attrs={"class": "title"})[0].find('a') is not None:
             imdblink = scraping.find_all(attrs={"class": "title"})[0].find('a')['href']
-            req = urllib.urlopen(imdblink)
+            req = urllib.request.urlopen(imdblink)
             page = req.read()
             scraping = BeautifulSoup(page, "lxml")
             imdbrating = scraping.find_all(attrs={"itemprop": "ratingValue"})[0].text
@@ -84,3 +84,8 @@ def get_month_as_numberstring(month_string):
         'November': '11',
         'Dezember': '12',
     }[month_string]
+
+resultstitle = get_all_title_links()
+results = get_movie_details(resultstitle)
+
+print(results)

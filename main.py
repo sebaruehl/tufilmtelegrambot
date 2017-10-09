@@ -208,7 +208,7 @@ class WebHookHandler(webapp2.RequestHandler):
                                                    next_movie.imdbLink,
                                                    next_movie.imdbRating))
             else:
-                reply(chat_id, "Befehl ungebekannt. Benutze / für eine Überischt möglicher Befehle.")
+                reply(chat_id, u'Befehl ungebekannt. Benutze / für eine Überischt möglicher Befehle.')
 
         else:
             # reply(chat_id, "Use /<command>. See possible commands with /? or /commands.")
